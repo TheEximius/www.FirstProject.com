@@ -75,8 +75,8 @@
         }
         .menu-section {
             display: flex;
-            flex-wrap: nowrap; /* No wrapping for a single row */
-            overflow-x: auto; /* Allow horizontal scroll */
+            flex-wrap: wrap; /* Allow wrapping for multiple rows */
+            justify-content: center; /* Center the items */
             padding: 20px;
         }
         .menu-item {
@@ -85,9 +85,8 @@
             margin: 10px;
             padding: 15px;
             text-align: center;
-            flex: 0 0 auto; /* Maintain item size */
-            width: calc(25% - 20px); /* Adjust width for four items */
-            max-width: 200px; /* Optional: limit max width */
+            flex: 1 1 calc(50% - 20px); /* Two items per row */
+            max-width: 200px; /* Limit max width */
         }
         .menu-item img {
             width: 80%; /* Reduced size of images */
@@ -133,7 +132,7 @@
         }
         @media (max-width: 768px) {
             .menu-item {
-                width: calc(33.33% - 20px); /* Adjust for three items per row on smaller screens */
+                flex: 1 1 calc(100% - 20px); /* Full width on smaller screens */
             }
         }
     </style>
@@ -322,8 +321,6 @@
         <div class="menu-item" data-item="Chicken Nuggets">
             <img src="https://img.icons8.com/emoji/48/000000/chicken.png" alt="Chicken Nuggets"/>
             <div class="side-name">Chicken Nuggets</div>
-            <div class="side-description">Crispy chicken nuggets.</div>
-
             <div class="side-description">Crispy chicken nuggets.</div>
             <div class="price">$4.99</div>
             <button class="button" onclick="toggleToppings(this)">Choose Toppings</button>
