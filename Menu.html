@@ -13,52 +13,45 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px;
-            z-index: 1001; /* Ensure header is above other content */
+            z-index: 1001;
         }
-
         header img {
             height: 80px;
         }
-
         .sidebar {
-    background-color: rgba(0, 0, 0, 0.7); /* Black background with 70% opacity */
-    width: 200px;
-    height: calc(100vh - 80px); /* Adjust height to fit below header */
-    position: fixed;
-    top: 129px; /* Align below the header */
-    left: 0;
-    padding: 20px;
-    transition: transform 0.3s ease;
-    transform: translateX(-100%);
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
-    z-index: 1000; /* Ensure sidebar is above other content */
-}
-
-.sidebar.open {
-    transform: translateX(0);
-}
-
-.sidebar h2 {
-    color:#F9B100;
-    font-family: Arial, sans-serif;
-    cursor: pointer;
-}
-
-.sidebar-option {
-    margin: 10px 0;
-    color: #F9B100; /* Text color */
-    font-family: Arial, sans-serif;
-    cursor: pointer;
-    opacity: 0; /* Start hidden for animation */
-    transform: translateY(20px); /* Initial position for animation */
-    transition: opacity 0.5s ease, transform 0.5s ease; /* Animation time */
-}
-
-.sidebar.open .sidebar-option {
-    opacity: 1; /* Fade in */
-    transform: translateY(0); /* Move to original position */
-}
-
+            background-color: rgba(0, 0, 0, 0.7);
+            width: 200px;
+            height: calc(100vh - 80px);
+            position: fixed;
+            top: 129px;
+            left: 0;
+            padding: 20px;
+            transition: transform 0.3s ease;
+            transform: translateX(-100%);
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+        .sidebar.open {
+            transform: translateX(0);
+        }
+        .sidebar h2 {
+            color: #F9B100;
+            font-family: Arial, sans-serif;
+            cursor: pointer;
+        }
+        .sidebar-option {
+            margin: 10px 0;
+            color: #F9B100;
+            font-family: Arial, sans-serif;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .sidebar.open .sidebar-option {
+            opacity: 1;
+            transform: translateY(0);
+        }
         .close-btn {
             color: rgb(246, 246, 246);
             font-size: 24px;
@@ -67,7 +60,6 @@
             cursor: pointer;
             margin-bottom: 20px;
         }
-
         .toggle-sidebar {
             color: white;
             font-family: Arial, sans-serif;
@@ -75,14 +67,6 @@
             padding: 5px 10px;
             border: none;
             background: transparent;
-        }
-
-        @media (max-width: 768px) {
-            .sidebar {
-                width: 100%;
-                height: auto;
-                top: 60px; /* Adjust for smaller header */
-            }
         }
         body {
             background-color: black;
@@ -92,7 +76,7 @@
         .menu-section {
             display: flex;
             flex-wrap: wrap;
-            justify-content: center;
+            justify-content: space-between; /* Adjusted to space items evenly */
             padding: 20px;
         }
         .menu-item {
@@ -101,23 +85,23 @@
             margin: 10px;
             padding: 15px;
             text-align: center;
-            width: 100%;
-            max-width: 250px;
+            flex: 1 1 calc(25% - 20px); /* Ensures 4 items fit in a row with spacing */
+            max-width: 250px; /* Optional: limit max width */
         }
         .menu-item img {
-            width: 100%;
+            width: 80%; /* Reduced size of images */
             height: auto;
             border-radius: 5px;
             background-color: black;
         }
-        .burger-name {
+        .burger-name, .milkshake-name, .side-name {
             color: #F9B100;
-            font-size: 1.5em;
+            font-size: 1.2em; /* Adjusted font size */
             margin: 10px 0;
         }
-        .burger-description, .price, .toppings-label {
+        .burger-description, .milkshake-description, .side-description, .price {
             color: white;
-            font-size: 1em;
+            font-size: 0.9em; /* Adjusted font size */
         }
         .toppings {
             display: none;
@@ -133,7 +117,7 @@
             background-color: #F9B100;
             color: black;
             border: none;
-            padding: 10px 15px;
+            padding: 8px 10px; /* Adjusted padding */
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s;
@@ -146,148 +130,226 @@
             margin-top: 20px;
             font-weight: bold;
         }
+        @media (max-width: 768px) {
+            .menu-item {
+                flex: 1 1 calc(50% - 20px); /* Two items per row on smaller screens */
+            }
+        }
     </style>
 </head>
 <body>
 
+<header>
+    <img src="Image_Logo.jpg" alt="Chips Logo">
+    <h1>Chips</h1>
+    <button class="toggle-sidebar" onclick="toggleSidebar()">☰</button>
+</header>
 
-    <header>
-        <img src="Image_Logo.jpg" alt="Chips Logo">
-        <h1>Chips</h1>
-        <button class="toggle-sidebar" onclick="toggleSidebar()">☰</button>
-    </header>
-    
-    <div class="sidebar" id="sidebar">
-        <button class="close-btn" onclick="toggleSidebar()">✖</button>
-        <h2>Menu</h2>
-        <div class="sidebar-option" onclick="redirectToPage('about.html')">About</div>
-        <div class="sidebar-option" onclick="redirectToPage('menu.html')">Menu</div>
-        <div class="sidebar-option" onclick="redirectToPage('place_order.html')">Place Order</div>
+<div class="sidebar" id="sidebar">
+    <button class="close-btn" onclick="toggleSidebar()">✖</button>
+    <h2>Menu</h2>
+    <div class="sidebar-option" onclick="redirectToPage('about.html')">About</div>
+    <div class="sidebar-option" onclick="redirectToPage('menu.html')">Menu</div>
+    <div class="sidebar-option" onclick="redirectToPage('place_order.html')">Place Order</div>
+</div>
+
+<div class="section-title" style="color: yellow; font-size: 2em; text-align: center; margin-bottom: 15px; padding: 15px; background: black; border-radius: 5px; font-weight: bold;">
+    Chips Menu
+</div>
+
+<div class="content" style="text-align: center; padding: 10px;">
+    <div class="menu-section">
+        <h2 style="width: 100%; color: #F9B100;">Burgers</h2>
+        <div class="menu-item" data-item="Classic Beef Burger">
+            <img src="https://img.icons8.com/emoji/48/000000/hamburger-emoji.png" alt="Classic Beef Burger"/>
+            <div class="burger-name">Classic Beef Burger</div>
+            <div class="burger-description">A juicy beef patty with fresh toppings.</div>
+            <div class="price">$5.99</div>
+            <button class="button" onclick="toggleToppings(this)">Choose Toppings</button>
+            <ul class="toppings">
+                <li><input type="checkbox" id="lettuce"><label for="lettuce">Lettuce</label></li>
+                <li><input type="checkbox" id="tomato"><label for="tomato">Tomato</label></li>
+                <li><input type="checkbox" id="onion"><label for="onion">Onion</label></li>
+                <li><input type="checkbox" id="cheese"><label for="cheese">Cheese</label></li>
+                <li><input type="checkbox" id="bacon"><label for="bacon">Bacon</label></li>
+            </ul>
+            <button class="button" onclick="sendOrder('Classic Beef Burger', 'order-number')">Send Order</button>
+            <div class="order-number" id="order-number"></div>
+        </div>
+
+        <div class="menu-item" data-item="Chicken Burger">
+            <img src="https://img.icons8.com/emoji/48/000000/hamburger-emoji.png" alt="Chicken Burger"/>
+            <div class="burger-name">Chicken Burger</div>
+            <div class="burger-description">Crispy chicken with a spicy kick.</div>
+            <div class="price">$6.49</div>
+            <button class="button" onclick="toggleToppings(this)">Choose Toppings</button>
+            <ul class="toppings">
+                <li><input type="checkbox" id="lettuce2"><label for="lettuce2">Lettuce</label></li>
+                <li><input type="checkbox" id="tomato2"><label for="tomato2">Tomato</label></li>
+                <li><input type="checkbox" id="onion2"><label for="onion2">Onion</label></li>
+                <li><input type="checkbox" id="cheese2"><label for="cheese2">Cheese</label></li>
+                <li><input type="checkbox" id="bacon2"><label for="bacon2">Bacon</label></li>
+            </ul>
+            <button class="button" onclick="sendOrder('Chicken Burger', 'order-number2')">Send Order</button>
+            <div class="order-number" id="order-number2"></div>
+        </div>
+
+        <div class="menu-item" data-item="Veggie Burger">
+            <img src="https://img.icons8.com/emoji/48/000000/hamburger-emoji.png" alt="Veggie Burger"/>
+            <div class="burger-name">Veggie Burger</div>
+            <div class="burger-description">A healthy mix of vegetables and spices.</div>
+            <div class="price">$5.49</div>
+            <button class="button" onclick="toggleToppings(this)">Choose Toppings</button>
+            <ul class="toppings">
+                <li><input type="checkbox" id="lettuce3"><label for="lettuce3">Lettuce</label></li>
+                <li><input type="checkbox" id="tomato3"><label for="tomato3">Tomato</label></li>
+                <li><input type="checkbox" id="onion3"><label for="onion3">Onion</label></li>
+                <li><input type="checkbox" id="cheese3"><label for="cheese3">Cheese</label></li>
+                <li><input type="checkbox" id="bacon3"><label for="bacon3">Bacon</label></li>
+            </ul>
+            <button class="button" onclick="sendOrder('Veggie Burger', 'order-number3')">Send Order</button>
+            <div class="order-number" id="order-number3"></div>
+        </div>
+
+        <div class="menu-item" data-item="Fish Burger">
+            <img src="https://img.icons8.com/emoji/48/000000/hamburger-emoji.png" alt="Fish Burger"/>
+            <div class="burger-name">Fish Burger</div>
+            <div class="burger-description">Crispy fish fillet with tartar sauce.</div>
+            <div class="price">$7.29</div>
+            <button class="button" onclick="toggleToppings(this)">Choose Toppings</button>
+            <ul class="toppings">
+                <li><input type="checkbox" id="lettuce4"><label for="lettuce4">Lettuce</label></li>
+                <li><input type="checkbox" id="tomato4"><label for="tomato4">Tomato</label></li>
+                <li><input type="checkbox" id="onion4"><label for="onion4">Onion</label></li>
+                <li><input type="checkbox" id="cheese4"><label for="cheese4">Cheese</label></li>
+                <li><input type="checkbox" id="bacon4"><label for="bacon4">Bacon</label></li>
+            </ul>
+            <button class="button" onclick="sendOrder('Fish Burger', 'order-number4')">Send Order</button>
+            <div class="order-number" id="order-number4"></div>
+        </div>
     </div>
 
-<div class="menu-section">
-    <div class="menu-item" data-item="Classic Beef Burger">
-        <img src="image beef burger.jpg" alt="Classic Beef Burger"/>
-        <div class="burger-name">Classic Beef Burger</div>
-        <div class="burger-description">A juicy beef patty with fresh toppings.</div>
-        <br>
-        <div class="price">$5.99</div>
-        <br>
-        <button class="button" onclick="toggleToppings(this)">Choose Toppings</button>
-        <ul class="toppings">
-            <li><input type="checkbox" id="lettuce"><label for="lettuce">Lettuce</label></li>
-            <li><input type="checkbox" id="tomato"><label for="tomato">Tomato</label></li>
-            <li><input type="checkbox" id="onion"><label for="onion">Onion</label></li>
-            <li><input type="checkbox" id="cheese"><label for="cheese">Cheese</label></li>
-            <li><input type="checkbox" id="bacon"><label for="bacon">Bacon</label></li>
-        </ul>
-        <button class="button" onclick="sendOrder('Classic Beef Burger')">Send Order</button>
-        <div class="order-number" id="order-number"></div>
-    </div>
-    
-    <div class="menu-item" data-item="Chicken Burger">
-        <img src="image chicken burger.jpg" alt="Chicken Burger"/>
-        <div class="burger-name">Chicken Burger</div>
-        <div class="burger-description">Crispy chicken with a spicy kick.</div>
-        <br>
-        <div class="price">$6.49</div>
-        <br>
-        <button class="button" onclick="toggleToppings(this)">Choose Toppings</button>
-        <ul class="toppings">
-            <li><input type="checkbox" id="lettuce2"><label for="lettuce2">Lettuce</label></li>
-            <li><input type="checkbox" id="tomato2"><label for="tomato2">Tomato</label></li>
-            <li><input type="checkbox" id="onion2"><label for="onion2">Onion</label></li>
-            <li><input type="checkbox" id="cheese2"><label for="cheese2">Cheese</label></li>
-            <li><input type="checkbox" id="bacon2"><label for="bacon2">Bacon</label></li>
-        </ul>
-        <button class="button" onclick="sendOrder('Chicken Burger')">Send Order</button>
-        <div class="order-number" id="order-number2"></div>
+    <div class="menu-section">
+        <h2 style="width: 100%; color: #F9B100;">Milkshakes</h2>
+        <div class="menu-item" data-item="Chocolate Milkshake">
+            <img src="https://img.icons8.com/emoji/48/000000/milkshake.png" alt="Chocolate Milkshake"/>
+            <div class="milkshake-name">Chocolate Milkshake</div>
+            <div class="milkshake-description">Creamy chocolate goodness.</div>
+            <div class="price">$3.99</div>
+            <button class="button" onclick="toggleToppings(this)">Choose Toppings</button>
+            <ul class="toppings">
+                <li><input type="checkbox" id="whipped-cream1"><label for="whipped-cream1">Whipped Cream</label></li>
+                <li><input type="checkbox" id="chocolate-syrup1"><label for="chocolate-syrup1">Chocolate Syrup</label></li>
+            </ul>
+            <button class="button" onclick="sendOrder('Chocolate Milkshake', 'order-number5')">Send Order</button>
+            <div class="order-number" id="order-number5"></div>
+        </div>
+
+        <div class="menu-item" data-item="Strawberry Milkshake">
+            <img src="https://img.icons8.com/emoji/48/000000/milkshake.png" alt="Strawberry Milkshake"/>
+            <div class="milkshake-name">Strawberry Milkshake</div>
+            <div class="milkshake-description">Fresh strawberry delight.</div>
+            <div class="price">$4.29</div>
+            <button class="button" onclick="toggleToppings(this)">Choose Toppings</button>
+            <ul class="toppings">
+                <li><input type="checkbox" id="whipped-cream2"><label for="whipped-cream2">Whipped Cream</label></li>
+                <li><input type="checkbox" id="sprinkles2"><label for="sprinkles2">Sprinkles</label></li>
+            </ul>
+            <button class="button" onclick="sendOrder('Strawberry Milkshake', 'order-number6')">Send Order</button>
+            <div class="order-number" id="order-number6"></div>
+        </div>
+
+        <div class="menu-item" data-item="Vanilla Milkshake">
+            <img src="https://img.icons8.com/emoji/48/000000/milkshake.png" alt="Vanilla Milkshake"/>
+            <div class="milkshake-name">Vanilla Milkshake</div>
+            <div class="milkshake-description">Classic vanilla flavor.</div>
+            <div class="price">$3.49</div>
+            <button class="button" onclick="toggleToppings(this)">Choose Toppings</button>
+            <ul class="toppings">
+                <li><input type="checkbox" id="whipped-cream3"><label for="whipped-cream3">Whipped Cream</label></li>
+                <li><input type="checkbox" id="caramel-syrup3"><label for="caramel-syrup3">Caramel Syrup</label></li>
+            </ul>
+            <button class="button" onclick="sendOrder('Vanilla Milkshake', 'order-number7')">Send Order</button>
+            <div class="order-number" id="order-number7"></div>
+        </div>
+
+        <div class="menu-item" data-item="Mint Milkshake">
+            <img src="https://img.icons8.com/emoji/48/000000/milkshake.png" alt="Mint Milkshake"/>
+            <div class="milkshake-name">Mint Milkshake</div>
+            <div class="milkshake-description">Refreshing mint flavor.</div>
+            <div class="price">$4.49</div>
+            <button class="button" onclick="toggleToppings(this)">Choose Toppings</button>
+            <ul class="toppings">
+                <li><input type="checkbox" id="whipped-cream4"><label for="whipped-cream4">Whipped Cream</label></li>
+                <li><input type="checkbox" id="chocolate-chips4"><label for="chocolate-chips4">Chocolate Chips</label></li>
+            </ul>
+            <button class="button" onclick="sendOrder('Mint Milkshake', 'order-number8')">Send Order</button>
+            <div class="order-number" id="order-number8"></div>
+        </div>
     </div>
 
-    <div class="menu-item" data-item="Veggie Burger">
-        <img src="image veggie burger.jpg" alt="Veggie Burger"/>
-        <div class="burger-name">Veggie Burger</div>
-        <div class="burger-description">A healthy mix of vegetables and spices.</div>
-        <br>
-        <div class="price">$5.49</div>
-        <br>
-        <button class="button" onclick="toggleToppings(this)">Choose Toppings</button>
-        <ul class="toppings">
-            <li><input type="checkbox" id="lettuce3"><label for="lettuce3">Lettuce</label></li>
-            <li><input type="checkbox" id="tomato3"><label for="tomato3">Tomato</label></li>
-            <li><input type="checkbox" id="onion3"><label for="onion3">Onion</label></li>
-            <li><input type="checkbox" id="cheese3"><label for="cheese3">Cheese</label></li>
-            <li><input type="checkbox" id="bacon3"><label for="bacon3">Bacon</label></li>
-        </ul>
-        <button class="button" onclick="sendOrder('Veggie Burger')">Send Order</button>
-        <div class="order-number" id="order-number3"></div>
-    </div>
+    <div class="menu-section">
+        <h2 style="width: 100%; color: #F9B100;">Sides</h2>
+        <div class="menu-item" data-item="French Fries">
+            <img src="https://img.icons8.com/emoji/48/000000/french-fries.png" alt="French Fries"/>
+            <div class="side-name">French Fries</div>
+            <div class="side-description">Crispy and golden fries.</div>
+            <div class="price">$2.49</div>
+            <button class="button" onclick="toggleToppings(this)">Choose Toppings</button>
+            <ul class="toppings">
+                <li><input type="checkbox" id="ketchup1"><label for="ketchup1">Ketchup</label></li>
+                <li><input type="checkbox" id="cheese-sauce1"><label for="cheese-sauce1">Cheese Sauce</label></li>
+            </ul>
+            <button class="button" onclick="sendOrder('French Fries', 'order-number9')">Send Order</button>
+            <div class="order-number" id="order-number9"></div>
+        </div>
 
-    <div class="menu-item" data-item="Fish Burger">
-        <img src="image fish burger.jpg" alt="Fish Burger"/>
-        <div class="burger-name">Fish Burger</div>
-        <div class="burger-description">Crispy fish fillet with tartar sauce.</div>
-        <br>
-        <div class="price">$7.29</div>
-        <br>
-        <button class="button" onclick="toggleToppings(this)">Choose Toppings</button>
-        <ul class="toppings">
-            <li><input type="checkbox" id="lettuce4"><label for="lettuce4">Lettuce</label></li>
-            <li><input type="checkbox" id="tomato4"><label for="tomato4">Tomato</label></li>
-            <li><input type="checkbox" id="onion4"><label for="onion4">Onion</label></li>
-            <li><input type="checkbox" id="cheese4"><label for="cheese4">Cheese</label></li>
-            <li><input type="checkbox" id="bacon4"><label for="bacon4">Bacon</label></li>
-        </ul>
-        <button class="button" onclick="sendOrder('Fish Burger')">Send Order</button>
-        <div class="order-number" id="order-number4"></div>
+        <div class="menu-item" data-item="Onion Rings">
+            <img src="https://img.icons8.com/emoji/48/000000/onion.png" alt="Onion Rings"/>
+            <div class="side-name">Onion Rings</div>
+            <div class="side-description">Crispy onion rings.</div>
+            <div class="price">$3.29</div>
+            <button class="button" onclick="toggleToppings(this)">Choose Toppings</button>
+            <ul class="toppings">
+                <li><input type="checkbox" id="ketchup2"><label for="ketchup2">Ketchup</label></li>
+                <li><input type="checkbox" id="ranch2"><label for="ranch2">Ranch Dressing</label></li>
+            </ul>
+            <button class="button" onclick="sendOrder('Onion Rings', 'order-number10')">Send Order</button>
+            <div class="order-number" id="order-number10"></div>
+        </div>
+
+        <div class="menu-item" data-item="Chicken Nuggets">
+            <img src="https://img.icons8.com/emoji/48/000000/chicken.png" alt="Chicken Nuggets"/>
+            <div class="side-name">Chicken Nuggets</div>
+
+                <div class="side-description">Crispy chicken nuggets.</div>
+            <div class="price">$4.99</div>
+            <button class="button" onclick="toggleToppings(this)">Choose Toppings</button>
+            <ul class="toppings">
+                <li><input type="checkbox" id="bbq-sauce3"><label for="bbq-sauce3">BBQ Sauce</label></li>
+                <li><input type="checkbox" id="honey-mustard3"><label for="honey-mustard3">Honey Mustard</label></li>
+            </ul>
+            <button class="button" onclick="sendOrder('Chicken Nuggets', 'order-number11')">Send Order</button>
+            <div class="order-number" id="order-number11"></div>
+        </div>
+
+        <div class="menu-item" data-item="Mozzarella Sticks">
+            <img src="https://img.icons8.com/emoji/48/000000/mozzarella.png" alt="Mozzarella Sticks"/>
+            <div class="side-name">Mozzarella Sticks</div>
+            <div class="side-description">Delicious cheesy sticks.</div>
+            <div class="price">$5.49</div>
+            <button class="button" onclick="toggleToppings(this)">Choose Toppings</button>
+            <ul class="toppings">
+                <li><input type="checkbox" id="marinara-sauce4"><label for="marinara-sauce4">Marinara Sauce</label></li>
+                <li><input type="checkbox" id="ranch4"><label for="ranch4">Ranch Dressing</label></li>
+            </ul>
+            <button class="button" onclick="sendOrder('Mozzarella Sticks', 'order-number12')">Send Order</button>
+            <div class="order-number" id="order-number12"></div>
+        </div>
     </div>
 </div>
 
 <script>
-      function toggleSidebar() {
-        const sidebar = document.getElementById('sidebar');
-        const options = sidebar.querySelectorAll('.sidebar-option');
-
-        // If sidebar is being opened
-        if (!sidebar.classList.contains('open')) {
-            sidebar.classList.add('open');
-
-            // Trigger reflow to restart the animation
-            void sidebar.offsetWidth; // Forces reflow
-
-            // Start animation for each option
-            options.forEach((option, index) => {
-                setTimeout(() => {
-                    option.style.opacity = 1; // Set opacity to full
-                    option.style.transform = 'translateY(0)'; // Move to original position
-                }, index * 100); // Stagger the animation for each option
-            });
-        } else {
-            // If sidebar is being closed
-            sidebar.classList.remove('open');
-
-            // Reset options to hide them immediately
-            options.forEach(option => {
-                option.style.opacity = 0; // Hide options
-                option.style.transform = 'translateY(20px)'; // Reset position
-            });
-        }
-    }
-
-    function redirectToPage(page) {
-        toggleSidebar(); // Close the sidebar before redirecting
-        setTimeout(() => {
-            window.location.href = page; // Redirect to the specified page
-        }, 300); // Delay to allow sidebar to close smoothly
-    }
-
-    // Close sidebar when clicking outside
-    document.addEventListener('click', function(event) {
-        const sidebar = document.getElementById('sidebar');
-        if (sidebar.classList.contains('open') && !sidebar.contains(event.target) && !event.target.matches('.toggle-sidebar')) {
-            toggleSidebar();
-        }
-    });
     function toggleToppings(button) {
         const toppingsList = button.nextElementSibling;
         toppingsList.style.display = toppingsList.style.display === 'block' ? 'none' : 'block';
@@ -302,23 +364,31 @@
         return result;
     }
 
-    function sendOrder(item) {
+    function sendOrder(item, orderNumberId) {
         const toppings = [];
-        const toppingCheckboxes = document.querySelectorAll(`.menu-item[data-item="${item}"] .toppings input:checked`);
+        const toppingCheckboxes = document.querySelectorAll(.menu-item[data-item="${item}"] .toppings input:checked);
         toppingCheckboxes.forEach(checkbox => {
             toppings.push(checkbox.nextElementSibling.innerText);
         });
 
         const orderNumber = generateOrderNumber();
         const emailBody = `Order: ${item}${toppings.length > 0 ? ` with toppings: ${toppings.join(', ')}` : ''}\nOrder Number: ${orderNumber}`;
-        const mailtoLink = `mailto:theeximiusdigital@gmail.com?subject=New Order&body=${encodeURIComponent(emailBody)}`;
+        const mailtoLink = mailto:theeximiusdigital@gmail.com?subject=New Order&body=${encodeURIComponent(emailBody)};
 
-        // Final alert before sending
-        const finalAlert = `You are about to place the following order:\n${emailBody}`;
+        const finalAlert = You are about to place the following order:\n${emailBody};
         if (confirm(finalAlert)) {
             window.location.href = mailtoLink;
-            document.getElementById(`order-number${item}`).innerText = `Your Order Number: ${orderNumber}`;
+            document.getElementById(orderNumberId).innerText = Your Order Number: ${orderNumber};
         }
+    }
+
+    function toggleSidebar() {
+        const sidebar = document.getElementById('sidebar');
+        sidebar.classList.toggle('open');
+    }
+
+    function redirectToPage(page) {
+        window.location.href = page;
     }
 </script>
 
