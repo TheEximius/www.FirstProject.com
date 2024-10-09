@@ -75,8 +75,8 @@
         }
         .menu-section {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between; /* Adjusted to space items evenly */
+            flex-wrap: nowrap; /* No wrapping for a single row */
+            overflow-x: auto; /* Allow horizontal scroll */
             padding: 20px;
         }
         .menu-item {
@@ -85,8 +85,9 @@
             margin: 10px;
             padding: 15px;
             text-align: center;
-            flex: 1 1 calc(25% - 20px); /* Ensures 4 items fit in a row with spacing */
-            max-width: 250px; /* Optional: limit max width */
+            flex: 0 0 auto; /* Maintain item size */
+            width: calc(25% - 20px); /* Adjust width for four items */
+            max-width: 200px; /* Optional: limit max width */
         }
         .menu-item img {
             width: 80%; /* Reduced size of images */
@@ -96,12 +97,12 @@
         }
         .burger-name, .milkshake-name, .side-name {
             color: #F9B100;
-            font-size: 1.2em; /* Adjusted font size */
+            font-size: 1.2em;
             margin: 10px 0;
         }
         .burger-description, .milkshake-description, .side-description, .price {
             color: white;
-            font-size: 0.9em; /* Adjusted font size */
+            font-size: 0.9em;
         }
         .toppings {
             display: none;
@@ -117,7 +118,7 @@
             background-color: #F9B100;
             color: black;
             border: none;
-            padding: 8px 10px; /* Adjusted padding */
+            padding: 8px 10px;
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s;
@@ -132,7 +133,7 @@
         }
         @media (max-width: 768px) {
             .menu-item {
-                flex: 1 1 calc(50% - 20px); /* Two items per row on smaller screens */
+                width: calc(33.33% - 20px); /* Adjust for three items per row on smaller screens */
             }
         }
     </style>
@@ -167,14 +168,14 @@
             <div class="price">$5.99</div>
             <button class="button" onclick="toggleToppings(this)">Choose Toppings</button>
             <ul class="toppings">
-                <li><input type="checkbox" id="lettuce"><label for="lettuce">Lettuce</label></li>
-                <li><input type="checkbox" id="tomato"><label for="tomato">Tomato</label></li>
-                <li><input type="checkbox" id="onion"><label for="onion">Onion</label></li>
-                <li><input type="checkbox" id="cheese"><label for="cheese">Cheese</label></li>
-                <li><input type="checkbox" id="bacon"><label for="bacon">Bacon</label></li>
+                <li><input type="checkbox" id="lettuce1"><label for="lettuce1">Lettuce</label></li>
+                <li><input type="checkbox" id="tomato1"><label for="tomato1">Tomato</label></li>
+                <li><input type="checkbox" id="onion1"><label for="onion1">Onion</label></li>
+                <li><input type="checkbox" id="cheese1"><label for="cheese1">Cheese</label></li>
+                <li><input type="checkbox" id="bacon1"><label for="bacon1">Bacon</label></li>
             </ul>
-            <button class="button" onclick="sendOrder('Classic Beef Burger', 'order-number')">Send Order</button>
-            <div class="order-number" id="order-number"></div>
+            <button class="button" onclick="sendOrder('Classic Beef Burger', 'order-number1')">Send Order</button>
+            <div class="order-number" id="order-number1"></div>
         </div>
 
         <div class="menu-item" data-item="Chicken Burger">
@@ -321,8 +322,9 @@
         <div class="menu-item" data-item="Chicken Nuggets">
             <img src="https://img.icons8.com/emoji/48/000000/chicken.png" alt="Chicken Nuggets"/>
             <div class="side-name">Chicken Nuggets</div>
+            <div class="side-description">Crispy chicken nuggets.</div>
 
-                <div class="side-description">Crispy chicken nuggets.</div>
+            <div class="side-description">Crispy chicken nuggets.</div>
             <div class="price">$4.99</div>
             <button class="button" onclick="toggleToppings(this)">Choose Toppings</button>
             <ul class="toppings">
